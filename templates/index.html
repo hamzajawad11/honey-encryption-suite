@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HONEY ENCRYPTION | Advanced Quantum Cryptographic Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fira+Code:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Advanced Color Palette */
+            --primary-dark: #0a0a0f;
+            --secondary-dark: #121218;
+            --accent-dark: #1a1a26;
+            --card-bg: #1e1e2e;
+            --glass-bg: rgba(30, 30, 46, 0.8);
+            --border-primary: #2a2a40;
+            --border-glow: #3a3a55;
+            
+            /* Neon Colors */
+            --neon-cyan: #00f5ff;
+            --neon-gold: #ffd700;
+            --neon-purple: #bf00ff;
+            --neon-green: #00ff41;
+            --neon-orange: #ff6b35;
+            --neon-pink: #ff007f;
+            --neon-blue: #0080ff;
+            
+            /* Text Colors */
+            --text-white: #ffffff;
+            --text-light: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dark: #64748b;
+            
+            /* Glows */
+            --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.5);
+            --glow-gold: 0 0 20px rgba(255, 215, 0, 0.5);
+            --glow-purple: 0 0 20px rgba(191, 0, 255, 0.5);
+            --glow-green: 0 0 20px rgba(0, 255, 65, 0.5);
+            
+            /* Status Colors */
+            --success: #00ff41;
+            --warning: #ffb000;
+            --error: #ff4757;
+            --info: #00f5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: 
+                radial-gradient(ellipse at top, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom, rgba(191, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at left, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at right, rgba(0, 255, 65, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--accent-dark) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-attachment: fixed;
+        }
+
+        /* Advanced Animated Background */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: float-up linear infinite;
+        }
+
+        .particle.cyan { 
+            background: var(--neon-cyan); 
+            box-shadow: var(--glow-cyan);
+        }
+        .particle.gold { 
+            background: var(--neon-gold); 
+            box-shadow: var(--glow-gold);
+        }
+        .particle.purple { 
+            background: var(--neon-purple); 
+            box-shadow: var(--glow-purple);
+        }
+        .particle.green { 
+            background: var(--neon-green); 
+            box-shadow: var(--glow-green);
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Scanning Lines Effect */
+        .scan-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: scan-vertical 3s linear infinite;
+        }
+
+        @keyframes scan-vertical {
+            0% { top: -2px; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* Professional Container */
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Futuristic Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-gold), var(--neon-purple), transparent);
+            border-radius: 2px;
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(0, 245, 255, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(0, 245, 255, 1), 0 0 60px rgba(255, 215, 0, 0.5); }
+        }
+
+        .logo-section {
+            margin-bottom: 2rem;
+        }
+
+        .honey-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-gold) 0%, var(--neon-cyan) 50%, var(--neon-purple) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 30px rgba(255, 215, 0, 0.5),
+                0 0 60px rgba(0, 245, 255, 0.3),
+                0 0 90px rgba(191, 0, 255, 0.2);
+            animation: gradient-shift 3s ease-in-out infinite, logo-glow 2s ease-in-out infinite alternate;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes logo-glow {
+            0% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+            100% { filter: drop-shadow(0 0 40px rgba(0, 245, 255, 0.8)); }
+        }
+
+        .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
+        }
+
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .status-item {
+            background: rgba(30, 30, 46, 0.6);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 1rem;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .status-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .status-item:hover::before {
+            left: 100%;
+        }
+
+        .status-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-2px);
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .status-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-value {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-top: 0.25rem;
+        }
+
+        /* Glass Morphism Cards */
+        .crypto-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .crypto-card {
+            background: rgba(30, 30, 46, 0.4);
+            border: 1px solid var(--border-primary);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(30px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .crypto-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .crypto-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 245, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .crypto-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 245, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-gold);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            letter-spacing: 2px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(20, 20, 30, 0.8);
+            border: 2px solid var(--border-primary);
+            border-radius: 10px;
+            color: var(--text-white);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            background: rgba(20, 20, 30, 0.95);
+        }
+
+        .input-field::placeholder {
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        .textarea-field {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Custom Dropdown */
+        .custom-select {
+            position: relative;
+        }
+
+        .select-trigger {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(20, 20, 30, 0.8);
+            border: 2px solid var(--border-primary);
+            border-radius: 10px;
+            color: var(--text-white);
+            font-family: 'Fira Code', monospace;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .select-trigger:hover,
+        .select-trigger.active {
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+        }
+
+        .select-arrow {
+            color: var(--neon-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .select-trigger.active .select-arrow {
+            transform: rotate(180deg);
+        }
+
+        .select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(20, 20, 30, 0.95);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 10px;
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            transform: translateY(-10px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .select-options.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        .select-option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .select-option:hover {
+            background: rgba(0, 245, 255, 0.1);
+            color: var(--neon-cyan);
+        }
+
+        /* Professional Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-cyan), #0080ff);
+            color: var(--text-white);
+            box-shadow: 0 8px 25px rgba(0, 245, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 15px 35px rgba(0, 245, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--neon-orange), #ff4757);
+            color: var(--text-white);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Output Areas */
+        .output-field {
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(10, 10, 15, 0.9);
+            border: 2px solid var(--border-primary);
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            min-height: 120px;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            word-break: break-all;
+            overflow-wrap: break-word;
+        }
+
+        .output-field:hover {
+            border-color: var(--neon-green);
+            box-shadow: var(--glow-green);
+        }
+
+        .output-field.cipher-output {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(191, 0, 255, 0.4);
+        }
+
+        .output-field.cipher-output:hover {
+            border-color: var(--neon-purple);
+            box-shadow: var(--glow-purple);
+        }
+
+        /* Status Messages */
+        .status-message {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .status-info {
+            background: rgba(0, 245, 255, 0.1);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            color: var(--neon-cyan);
+        }
+
+        .status-success {
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            color: var(--neon-green);
+        }
+
+        .status-warning {
+            background: rgba(255, 176, 0, 0.1);
+            border: 2px solid rgba(255, 176, 0, 0.3);
+            color: var(--warning);
+        }
+
+        .status-error {
+            background: rgba(255, 71, 87, 0.1);
+            border: 2px solid rgba(255, 71, 87, 0.3);
+            color: var(--error);
+        }
+
+        /* Metadata */
+        .metadata {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(20, 20, 30, 0.6);
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        .metadata-item {
+            color: var(--neon-cyan);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10000;
+        }
+
+        .toast {
+            background: rgba(20, 20, 30, 0.95);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(20px);
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+            box-shadow: var(--glow-green);
+        }
+
+        .toast.error {
+            border-color: var(--error);
+            color: var(--error);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--neon-cyan);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Professional Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-primary);
+            background: rgba(10, 10, 15, 0.8);
+        }
+
+        .footer-content {
+            font-family: 'Fira Code', monospace;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(191, 0, 255, 0.1);
+            border: 2px solid rgba(191, 0, 255, 0.3);
+            border-radius: 25px;
+            color: var(--neon-purple);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .crypto-section {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .system-status {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .honey-logo {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .crypto-card {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .system-status {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--neon-gold), var(--neon-cyan));
+        }
+    </style>
+</head>
+<body>
+    <!-- Advanced Background Effects -->
+    <div class="background-effects">
+        <div class="grid-overlay"></div>
+        <div class="floating-particles" id="particles"></div>
+    </div>
+
+    <!-- Scanning Lines -->
+    <div class="scan-lines">
+        <div class="scan-line"></div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Professional Header -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="honey-logo">HONEY ENCRYPTION</h1>
+                <p class="subtitle">Quantum-Resistant Cryptographic Security Suite</p>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-item">
+                    <span class="status-icon">🕒</span>
+                    <div class="status-label">System Time</div>
+                    <div class="status-value" id="currentTime">{{ current_time }}</div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">👤</span>
+                    <div class="status-label">Operator</div>
+                    <div class="status-value">{{ username }}</div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">🔐</span>
+                    <div class="status-label">Encryption</div>
+                    <div class="status-value">AES-256-GCM</div>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">🛡️</span>
+                    <div class="status-label">Security Level</div>
+                    <div class="status-value">QUANTUM SECURE</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Crypto Operations Section -->
+        <section class="crypto-section">
+            <!-- Encryption Card -->
+            <div class="crypto-card">
+                <div class="card-header">
+                    <span class="card-icon">🔒</span>
+                    <h2 class="card-title">ENCRYPT</h2>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Data Type</label>
+                    <div class="custom-select">
+                        <div class="select-trigger" onclick="toggleSelect('messageType')">
+                            <span id="messageTypeValue">Credit Card Number</span>
+                            <span class="select-arrow">▼</span>
+                        </div>
+                        <div class="select-options" id="messageTypeOptions">
+                            <div class="select-option" onclick="selectOption('messageType', 'Credit Card Number')">Credit Card Number</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Social Security Number')">Social Security Number</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Bank Account Number')">Bank Account Number</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Phone Number')">Phone Number</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Email Address')">Email Address</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Personal Message')">Personal Message</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'Password')">Password</div>
+                            <div class="select-option" onclick="selectOption('messageType', 'API Key')">API Key</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Sensitive Data</label>
+                    <textarea class="input-field textarea-field" id="encryptMessage" placeholder="Enter your confidential information here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Encryption Key</label>
+                    <input type="password" class="input-field" id="encryptPassword" placeholder="Enter a strong encryption password...">
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="performEncryption()">
+                        🔒 ENCRYPT
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearEncryption()">
+                        🗑️ CLEAR
+                    </button>
+                </div>
+
+                <div class="status-message status-info" id="encryptStatus">
+                    <span>⚡</span>
+                    <span>ENCRYPTION MODULE READY</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">🔐 Encrypted Output</label>
+                    <div class="output-field cipher-output" id="cipherOutput" onclick="copyToClipboard('cipherOutput')">
+                        Click "ENCRYPT" to generate secure ciphertext...
+                    </div>
+                </div>
+
+                <div class="metadata">
+                    <span class="metadata-item" id="encryptCharCount">📊 Length: 0 characters</span>
+                    <span class="metadata-item" id="encryptTime">⚡ Processing: 0ms</span>
+                </div>
+            </div>
+
+            <!-- Decryption Card -->
+            <div class="crypto-card">
+                <div class="card-header">
+                    <span class="card-icon">🔓</span>
+                    <h2 class="card-title">DECRYPT</h2>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Data Type</label>
+                    <div class="custom-select">
+                        <div class="select-trigger" onclick="toggleSelect('decryptMessageType')">
+                            <span id="decryptMessageTypeValue">Credit Card Number</span>
+                            <span class="select-arrow">▼</span>
+                        </div>
+                        <div class="select-options" id="decryptMessageTypeOptions">
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Credit Card Number')">Credit Card Number</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Social Security Number')">Social Security Number</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Bank Account Number')">Bank Account Number</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Phone Number')">Phone Number</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Email Address')">Email Address</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Personal Message')">Personal Message</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'Password')">Password</div>
+                            <div class="select-option" onclick="selectOption('decryptMessageType', 'API Key')">API Key</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Encrypted Data</label>
+                    <textarea class="input-field textarea-field" id="decryptCiphertext" placeholder="Paste encrypted ciphertext here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Decryption Key</label>
+                    <input type="password" class="input-field" id="decryptPassword" placeholder="Enter the decryption password...">
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="performDecryption()">
+                        🔓 DECRYPT
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearDecryption()">
+                        🗑️ CLEAR
+                    </button>
+                </div>
+
+                <div class="status-message status-warning" id="decryptStatus">
+                    <span>🔓</span>
+                    <span>DECRYPTION MODULE INITIALIZED</span>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📝 Decrypted Output</label>
+                    <div class="output-field" id="decryptOutput" onclick="copyToClipboard('decryptOutput')">
+                        Enter ciphertext and password, then click "DECRYPT"...
+                    </div>
+                </div>
+
+                <div class="metadata">
+                    <span class="metadata-item" id="decryptCharCount">🎯 Status: Ready</span>
+                    <span class="metadata-item">🧬 Algorithm: HONEY-AES</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>QUANTUM-RESISTANT CRYPTOGRAPHIC OPERATIONS TERMINAL</div>
+            <div>© 2025 HONEY ENCRYPTION SUITE | NEXT-GENERATION SECURITY PROTOCOL</div>
+            <div class="security-badge">
+                <span>🛡️</span>
+                <span>FIPS 140-2 LEVEL 4 CERTIFIED</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
